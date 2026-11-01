@@ -92,3 +92,4 @@ fs.cpSync(path.join(projectDir, 'src/css'), path.join(projectDir, 'www/css'), { 
 fs.cpSync(path.join(projectDir, 'src/js'), path.join(projectDir, 'www/js'), { recursive: true });
 
 console.log('Modularization complete! www/index.html created.');
+
