@@ -1,0 +1,29 @@
+{
+  "name": "diy-military-mobile",
+  "version": "1.0.6",
+  "description": "D.I.Y. Military - City Heat Edition Mobile Game",
+  "main": "www/index.html",
+  "scripts": {
+    "build:modular": "node build-modular.js",
+    "cap:sync": "npx cap sync",
+    "cap:open:android": "npx cap open android",
+    "dev": "npx serve www"
+  },
+  "keywords": [
+    "game",
+    "pixel-art",
+    "roguelike",
+    "top-down-shooter",
+    "mobile"
+  ],
+  "author": "Ghost Reyes Dev Team",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/status-bar": "^6.0.1",
+    "@capacitor/screen-orientation": "^6.0.1",
+    "@capacitor/haptics": "^6.0.1"
+  }
+}
