@@ -1,6 +1,6 @@
 {
   "appId": "com.diymilitary.cityheat",
-  "appName": "DIY Military: Tactical Ops",
+  "appName": "Call of Duty: Tactical Ops",
   "webDir": "www",
   "bundledWebRuntime": false,
   "server": {
@@ -11,7 +11,6 @@
     "allowMixedContent": false,
     "captureInput": true,
     "webContentsDebuggingEnabled": true,
-    "orientation": "portrait"
+    "orientation": "landscape"
   }
 }
-

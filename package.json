@@ -19,12 +19,15 @@
   "author": "Ghost Reyes Dev Team",
   "license": "UNLICENSED",
   "devDependencies": {
+    "@capacitor/android": "^6.1.2",
     "@capacitor/cli": "^6.1.2",
     "@capacitor/core": "^6.1.2",
-    "@capacitor/android": "^6.1.2",
-    "@capacitor/status-bar": "^6.0.1",
+    "@capacitor/haptics": "^6.0.1",
     "@capacitor/screen-orientation": "^6.0.1",
-    "@capacitor/haptics": "^6.0.1"
+    "@capacitor/status-bar": "^6.0.1"
+  },
+  "dependencies": {
+    "@types/three": "^0.187.0",
+    "three": "^0.187.0"
   }
 }
-

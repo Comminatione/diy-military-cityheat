@@ -40,8 +40,9 @@ if (fs.existsSync(bodyFile) && fs.existsSync(scriptsFile)) {
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Share+Tech+Mono&family=Russo+One&family=Oswald:wght@400;700&display=swap">
-<title>D.I.Y. MILITARY — CITY HEAT EDITION v100</title>
+<title>CALL OF DUTY: TACTICAL OPS</title>
 <link rel="stylesheet" href="css/style.css">
+<script src="three.min.js"></script>
 </head>
 <body>
 ${bodyHtml}
