@@ -451,7 +451,7 @@ cornerBrackets();
 
 _startCrawl({
 crawl: crawl, panels: panels, advanceHint: advanceHint, beginHint: beginHint,
-durations: [7000, 8600], pulse: 'crawlBtnPulse', resize: resizeCanvas, canvas: canvas,
+durations: [3200, 3800], pulse: 'crawlBtnPulse', resize: resizeCanvas, canvas: canvas,
 draw: (i, t, dt)=>{
 cctx.clearRect(0,0,cw,ch);
 if(i===0) drawScene0(t);

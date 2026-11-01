@@ -215,16 +215,27 @@ const numCol = overkill?'#ffff00':comboT>0.6?'#ff8800':'#ffcc99';
 $buildings.floatingTexts.push({x:bx+(Math.random()-0.5)*6,y:by-10,text:(overkill?'!':'')+Math.round(dmg),col:numCol,size:numSize,life:26,vy:-1.4-comboT*0.6,scale:overkill?1.4:1,scaleV:overkill?-0.02:0});
 }
 if(overkill && !$core.isVeryLow){
-ptclBurst(e.x,e.y,'#ffff00',$core.isMobile?6:14,6,18,3);
-if(e.boss) $replay._freezeFrames=Math.max($replay._freezeFrames,6);
-shake(7);
-floatTextPop(e.x,e.y-30,'OVERKILL','#ffff00',15);
+ptclBurst(e.x,e.y,'#ffff00',$core.isMobile?10:18,8,24,4);
+$replay._freezeFrames=Math.max($replay._freezeFrames,e.boss?6:3);
+shake(e.boss?12:7);
+floatTextPop(e.x,e.y-30,'OVERKILL','#ffff00',16);
+if(typeof vibrate==='function') vibrate(40);
 } else if(comboT>0.4 && !e.boss){
-shake(1+comboT*1.5);
+shake(1+comboT*2.0);
 }
-if(!isKillingBlow && !overkill && !$core.isVeryLow && (e.boss||(!($core.isUltraLow||$core.isLowEndDesktop)&&$enemies.get(e.type).ai.heavyHit)) && dmg>=3 && $buildings.tick-_lastBigHitStop>=6){
-$replay._freezeFrames=Math.max($replay._freezeFrames,e.boss?2:1);
-_lastBigHitStop=$buildings.tick;
+// Enhanced tactical hit-stop for impactful hits
+if(!isKillingBlow && dmg>=2 && $buildings.tick-_lastBigHitStop>=3){
+const _stopFrames = (e.boss ? 4 : (dmg >= 4 ? 3 : 2));
+$replay._freezeFrames = Math.max($replay._freezeFrames, _stopFrames);
+_lastBigHitStop = $buildings.tick;
+if(typeof vibrate==='function' && dmg>=4) vibrate(18);
+}
+// Directional knockback impulse on enemies
+if(e && !e.boss && typeof e.vx === 'number'){
+const kAngle = Math.atan2(e.y - by, e.x - bx);
+const kForce = Math.min(8, (dmg * 1.6));
+e.x += Math.cos(kAngle) * kForce;
+e.y += Math.sin(kAngle) * kForce;
 }
 }
 function throwGrenade(){

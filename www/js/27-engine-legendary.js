@@ -2406,13 +2406,14 @@ let dx=dv.x,dy=dv.y;
 if(!dx&&!dy){ dx=Math.cos(P.angle||0); dy=Math.sin(P.angle||0); }
 const m=Math.hypot(dx,dy)||1;
 const base=($replay.selectedChar==='commando'?4.5:$replay.selectedChar==='elite'?3.2:$replay.selectedChar==='heavy'?2.8:$replay.selectedChar==='sniper'?4.2:$replay.selectedChar==='medic'?3.6:$replay.selectedChar==='alien'?5.0:3.8);
-const sp=base*4.8;
-P._knifeDash={vx:dx/m*sp,vy:dy/m*sp,frames:10};
-P._iframes=12;
-P._dashCD=75;
-ptclQ(P.x,P.y,'#9fe8ff',$core.isMobile?4:8,5);
-try{audioManager._tone(520,0.07,'sine',0.07,180);}catch(_e){}
-shake(2);
+const sp=base*5.8;
+P._knifeDash={vx:dx/m*sp,vy:dy/m*sp,frames:14};
+P._iframes=16; // Generous invulnerability window on slide/dash
+P._dashCD=45;  // 0.75s snappy mobile cooldown
+ptclQ(P.x,P.y,'#9fe8ff',$core.isMobile?6:12,6);
+if(typeof vibrate==='function') vibrate(14);
+try{audioManager._tone(640,0.08,'sine',0.08,240);}catch(_e){}
+shake(3);
 }
 let _wsLastText='';
 function _updateWaveStatus(){

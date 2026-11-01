@@ -1079,6 +1079,13 @@ try{ if(typeof vibrate==='function') vibrate(6); }catch(_e){}
 joyBase.classList.add('joy-active');
 const t = e.changedTouches[0];
 if(t.identifier === aimId){ aimActive=false; aimId=null; stopAutoFire(); if(aimJoyBase) aimJoyBase.classList.remove('joy-active'); resetAimKnob(); }
+// Dynamic Floating Joystick repositioning
+if(joyBase && t.clientX < window.innerWidth * 0.48) {
+  const tc = touchControls.getBoundingClientRect();
+  joyBase.style.left = (t.clientX - tc.left - JOY_RADIUS) + 'px';
+  joyBase.style.top = (t.clientY - tc.top - JOY_RADIUS) + 'px';
+  joyBase.style.bottom = 'auto';
+}
 $profiler.joyActive = true;
 joyId = t.identifier;
 $profiler.joyDX = 0; $profiler.joyDY = 0;

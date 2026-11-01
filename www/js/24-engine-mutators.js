@@ -17,8 +17,8 @@ const { buildEnv, buildNavField, onBuilding } = $psycho1;
 Object.assign($mutators, { _dcPeekToday, _graceTaper, _tickGodMode, activateGodMode, checkKillWhispers, clearBosses, dcOnBossKill, dcOnDamageTaken, dcOnGrenadeKill, dcOnHealthPickup, dcOnKill, dcOnRapidState, dcOnStreak, dcOnWaveOrScore, evaluateDailyChallenges, getDailyState, initDailyChallenges, initGame, nextWave, onBossDefeated, recordRunStats, renderDailyChallenges, startLevel, updateRunStreak });
 yield;
 /* ── v101: campaign carry-over, continuous wave numbering, longer waves ── */
-const WAVE_ENEMY_MULT = 1.5;   // 1.0 = old length. Try 1.3–1.6
-const WAVE_ENEMY_FLAT = 4;     // flat bonus enemies per wave (wave 2+)
+const WAVE_ENEMY_MULT = 2.4;   // Extended wave length for tactical engagement
+const WAVE_ENEMY_FLAT = 8;     // Substantial enemy waves from wave 2+
 
 function _deserializeUpgradesLocal(raw){
   const copy = Object.assign({}, raw || {});
@@ -1263,10 +1263,10 @@ if($buildings.wave===1){ _openingWaveStart(); } else {
 buildWaveQueue(_lvlWave, $buildings.waveTotal);
 const _isLowHwSpawn = $core.isUltraLow || (typeof $core.isLowEndDesktop !== 'undefined' && $core.isLowEndDesktop);
 const _baseInterval = _isLowHwSpawn
-? Math.max(300, 1100 - $buildings.wave * 35)
+? Math.max(350, 1200 - $buildings.wave * 25)
 : ($core.isMobile && $buildings.wave >= 6)
-? Math.max(120, 820 - $buildings.wave * 35)
-: Math.max(90, 750 - $buildings.wave * 35);
+? Math.max(160, 950 - $buildings.wave * 25)
+: Math.max(130, 880 - $buildings.wave * 25);
 scheduleWaveSpawns($buildings.waveTotal, _baseInterval);
 }
 } else {
