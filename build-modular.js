@@ -1,95 +1,59 @@
 const fs = require('fs');
 const path = require('path');
 
-const projectDir = 'C:/Users/HP/.gemini/antigravity/scratch/diy-military';
-const srcFile = path.join(projectDir, 'diy-military.source.html');
+const projectDir = __dirname;
+const wwwDir = path.join(projectDir, 'www');
+const srcDir = path.join(projectDir, 'src');
 
-console.log('Reading source HTML...');
-const html = fs.readFileSync(srcFile, 'utf8');
+console.log('Syncing modular src to www...');
 
-const regex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
-const scripts = [];
-let match;
-while ((match = regex.exec(html)) !== null) {
-  scripts.push(match[1]);
+fs.mkdirSync(path.join(wwwDir, 'css'), { recursive: true });
+fs.mkdirSync(path.join(wwwDir, 'js'), { recursive: true });
+
+// Copy css
+if (fs.existsSync(path.join(srcDir, 'css'))) {
+  fs.cpSync(path.join(srcDir, 'css'), path.join(wwwDir, 'css'), { recursive: true });
 }
-console.log('Found', scripts.length, 'scripts.');
 
-const scriptManifest = [];
-scripts.forEach((content, idx) => {
-  let name = '';
-  if (content.includes('AudioManager')) name = 'audio-manager';
-  else if (content.includes('GameDatabase')) name = 'game-database';
-  else if (content.includes('appleUIEnhancement')) name = 'apple-ui';
-  else if (content.includes('BOSS-WAVE TENSION')) name = 'boss-tension';
-  else if (content.includes('WAR ZONE')) name = 'fx-warzone';
-  else if (content.includes('desert pixel extras')) name = 'fx-desert';
-  else if (content.includes('HUD QA')) name = 'hud-qa';
-  else if (content.includes('diy_ach_v1')) name = 'achievements';
-  else if (content.includes('hotkey-bar')) name = 'hotkey-bar';
-  else if (content.includes('bakeOnce')) name = 'bake-util';
-  else if (content.includes('window.__engine =')) name = 'engine-bootstrap';
-  else if (content.includes('window.__engineErrors')) name = 'engine-runner';
-  else if (content.includes('SUPPLY DROP')) name = 'airdrop-addon';
-  else if (content.includes('AUTHORED WAVES')) name = 'authored-waves';
-  else {
-    const modMatch = content.match(/function\*\s*([a-zA-Z0-9_]+)/);
-    if (modMatch) {
-      name = 'engine-' + modMatch[1];
-    } else if (content.includes('/* SOLDIER:')) name = 'enemy-soldier';
-    else if (content.includes('/* BERSERKER:')) name = 'enemy-berserker';
-    else if (content.includes('/* SNIPER:')) name = 'enemy-sniper';
-    else if (content.includes('/* HEAVY:')) name = 'enemy-heavy';
-    else if (content.includes('/* BOMBER:')) name = 'enemy-bomber';
-    else if (content.includes('/* SHIELD CARRIER:')) name = 'enemy-shield';
-    else if (content.includes('/* ELITE:')) name = 'enemy-elite';
-    else if (content.includes('/* GHOST:')) name = 'enemy-ghost';
-    else if (content.includes('/* JUGGERNAUT:')) name = 'enemy-juggernaut';
-    else if (content.includes('/* PHANTOM:')) name = 'enemy-phantom';
-    else if (content.includes('/* VRETH ALIENS')) name = 'enemy-vreth';
-    else if (content.includes('/* ENEMY REGISTRY')) name = 'enemy-registry';
-    else name = 'script-' + idx;
-  }
+// Copy js
+if (fs.existsSync(path.join(srcDir, 'js'))) {
+  fs.cpSync(path.join(srcDir, 'js'), path.join(wwwDir, 'js'), { recursive: true });
+}
 
-  const filename = String(idx).padStart(2, '0') + '-' + name + '.js';
-  fs.writeFileSync(path.join(projectDir, 'src/js', filename), content.trim());
-  scriptManifest.push(filename);
-});
+// Generate index.html if body.html and scripts.json exist
+const bodyFile = path.join(srcDir, 'body.html');
+const scriptsFile = path.join(srcDir, 'js', 'scripts.json');
 
-fs.writeFileSync(path.join(projectDir, 'src/js/scripts.json'), JSON.stringify(scriptManifest, null, 2));
+if (fs.existsSync(bodyFile) && fs.existsSync(scriptsFile)) {
+  const bodyHtml = fs.readFileSync(bodyFile, 'utf8');
+  const scripts = JSON.parse(fs.readFileSync(scriptsFile, 'utf8'));
 
-// Generate clean index.html in www
-const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
-let head = headMatch ? headMatch[1] : '';
-// strip style and scripts from head
-head = head.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
-head = head.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
+  const scriptTags = scripts.map(f => `  <script src="js/${f}"></script>`).join('\n');
 
-const bodyFile = path.join(projectDir, 'src/body.html');
-const bodyHtml = fs.readFileSync(bodyFile, 'utf8');
-
-const scriptTags = scriptManifest.map(f => `  <script src="js/${f}"></script>`).join('\n');
-
-const newIndexHtml = `<!DOCTYPE html>
+  const indexHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
-${head.trim()}
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Share+Tech+Mono&family=Russo+One&family=Oswald:wght@400;700&display=swap">
+<title>D.I.Y. MILITARY — CITY HEAT EDITION v100</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 ${bodyHtml}
 
-  <!-- Modular Scripts -->
+  <!-- Modular Game Scripts -->
 ${scriptTags}
 </body>
 </html>
 `;
 
-fs.writeFileSync(path.join(projectDir, 'www/index.html'), newIndexHtml);
+  fs.writeFileSync(path.join(wwwDir, 'index.html'), indexHtml);
+  console.log('Updated www/index.html successfully.');
+}
 
-// Copy css and js into www for immediate packaging/testing
-fs.cpSync(path.join(projectDir, 'src/css'), path.join(projectDir, 'www/css'), { recursive: true });
-fs.cpSync(path.join(projectDir, 'src/js'), path.join(projectDir, 'www/js'), { recursive: true });
-
-console.log('Modularization complete! www/index.html created.');
-
+console.log('Build complete.');
