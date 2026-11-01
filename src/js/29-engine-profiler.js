@@ -1027,9 +1027,8 @@ setHudCollapsed(true);
 window.showTouchControls = showTouchControls;
 function checkOrientation() {
 if (!$core.isMobile) return;
-const isPortrait = window.innerHeight > window.innerWidth;
-const tooNarrow = isPortrait && window.innerWidth < 360;
-portraitWarn.style.display = tooNarrow ? 'flex' : 'none';
+// Native portrait lock: suppress landscape warnings and embrace portrait format
+if(portraitWarn) portraitWarn.style.display = 'none';
 }
 function updateAimZoneSize() {
 const aimZone = document.getElementById('aim-zone');

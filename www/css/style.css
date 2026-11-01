@@ -10,58 +10,58 @@
   -webkit-user-select:none;
   user-select:none;
 }
-canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block;width:100%;height:100%;touch-action:none}
+canvas{image-rendering:auto;display:block;width:100%;height:100%;touch-action:none}
 html, body{width:100%;height:100%;overflow:hidden;overscroll-behavior:none;touch-action:none}
 :root{
-  --green:#aaff00;
-  --green-dim:#5aaa00;
-  --green-dark:#1e4400;
-  --green-glow:rgba(120,255,0,0.4);
-  --red:#ff3300;
-  --red-dim:#aa2200;
-  --red-glow:rgba(255,50,0,0.4);
-  --orange:#ff8800;
-  --yellow:#ffd700;
-  --bg:#040d02;
-  --bg2:#071403;
-  --panel-bg:rgba(2,10,1,0.96);
-  --border:#2a5000;
-  --border-bright:#5aaa00;
-  --font-title:"Black Ops One",sans-serif;
+  --green:#e6c35c; /* Modern COD MW Gold/Brass */
+  --green-dim:#a38531;
+  --green-dark:#3d2f09;
+  --green-glow:rgba(230, 195, 92, 0.45);
+  --red:#e63946;
+  --red-dim:#9d0208;
+  --red-glow:rgba(230, 57, 70, 0.45);
+  --orange:#f77f00;
+  --yellow:#ffbe0b;
+  --bg:#0b0d10; /* Tactical Slate/Onyx */
+  --bg2:#13171d;
+  --panel-bg:rgba(15, 18, 23, 0.94);
+  --border:#262f3d;
+  --border-bright:#4f5d75;
+  --font-title:"Oswald",sans-serif;
   --font-mono:"Share Tech Mono",monospace;
   --font-display:"Russo One",sans-serif;
   --joy-size-sm:100px;
   --joy-size-md:130px;
   --joy-size-lg:165px;
-  --apple-glass:rgba(4, 10, 2, 0.92);
-  --apple-glass-light:rgba(8, 18, 4, 0.85);
-  --apple-border:rgba(120, 255, 0, 0.28);
-  --apple-border-strong:rgba(120, 255, 0, 0.55);
-  --apple-blur:blur(6px) saturate(120%);
-  --apple-text:rgba(170, 255, 60, 0.95);
-  --apple-text-dim:rgba(120, 200, 40, 0.6);
-  --apple-text-muted:rgba(80, 140, 20, 0.45);
-  --apple-green:#7fff00;
-  --apple-red:#ff453a;
-  --apple-orange:#ff9f0a;
-  --apple-blue:#0a84ff;
-  --apple-shadow:0 4px 16px rgba(0,0,0,0.8), 0 1px 0 rgba(120,255,0,0.08) inset;
-  --apple-shadow-sm:0 2px 8px rgba(0,0,0,0.7);
+  --apple-glass:rgba(15, 20, 26, 0.92);
+  --apple-glass-light:rgba(24, 32, 42, 0.85);
+  --apple-border:rgba(230, 195, 92, 0.35);
+  --apple-border-strong:rgba(230, 195, 92, 0.7);
+  --apple-blur:blur(12px) saturate(140%);
+  --apple-text:rgba(240, 244, 248, 0.98);
+  --apple-text-dim:rgba(180, 192, 204, 0.75);
+  --apple-text-muted:rgba(120, 134, 150, 0.55);
+  --apple-green:#e6c35c;
+  --apple-red:#e63946;
+  --apple-orange:#f77f00;
+  --apple-blue:#2a9d8f;
+  --apple-shadow:0 8px 32px rgba(0,0,0,0.85), 0 1px 0 rgba(255,255,255,0.08) inset;
+  --apple-shadow-sm:0 4px 12px rgba(0,0,0,0.7);
   --hud-scale:1;
-  --ag:rgba(120,255,0,0.9);
-  --agd:rgba(80,180,0,0.7);
-  --agm:rgba(40,100,0,0.4);
-  --agdim:rgba(120,255,0,0.12);
-  --abg:rgba(6,14,4,0.88);
-  --aborder:rgba(120,255,0,0.16);
-  --aborderhi:rgba(120,255,0,0.38);
-  --ashadow:0 8px 32px rgba(0,0,0,0.6), 0 1px 0 rgba(120,255,0,0.06) inset;
-  --ashadowsm:0 4px 16px rgba(0,0,0,0.4);
-  --aspring:cubic-bezier(0.34, 1.56, 0.64, 1);
-  --aease:cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ui-r:6px;
-  --ui-r-md:4px;
-  --ui-r-sm:2px;
+  --ag:rgba(230,195,92,0.9);
+  --agd:rgba(163,133,49,0.7);
+  --agm:rgba(61,47,9,0.4);
+  --agdim:rgba(230,195,92,0.12);
+  --abg:rgba(15,20,26,0.92);
+  --aborder:rgba(255,255,255,0.12);
+  --aborderhi:rgba(230,195,92,0.45);
+  --ashadow:0 8px 32px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.08) inset;
+  --ashadowsm:0 4px 16px rgba(0,0,0,0.5);
+  --aspring:cubic-bezier(0.2, 0.8, 0.2, 1);
+  --aease:cubic-bezier(0.16, 1, 0.3, 1);
+  --ui-r:8px;
+  --ui-r-md:6px;
+  --ui-r-sm:4px;
   --ui-font:"Share Tech Mono",monospace;
   --ar:var(--ui-r);
   --arsm:var(--ui-r-md);
@@ -72,8 +72,8 @@ html, body{width:100%;height:100%;overflow:hidden;overscroll-behavior:none;touch
   --sf:var(--ui-font);
 }
 body{
-  background:#040d02;
-  color:#7fff00;
+  background:#0b0d10;
+  color:#f0f4f8;
   font-family:"Share Tech Mono",monospace;
   overflow:hidden;
   user-select:none;

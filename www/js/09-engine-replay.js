@@ -440,11 +440,9 @@ $replay._runtimeRenderScale = null;
 $replay._userResPref = 'auto';
 const _RES_SCALE_VALUES = { auto:null, high:1, medium:0.75, low:0.5 }; ;$replay._RES_SCALE_VALUES = _RES_SCALE_VALUES;
 function _getRenderScale(){
-if($replay._runtimeRenderScale !== null) return $replay._runtimeRenderScale;
-if(typeof $core.isVeryLow !== 'undefined' && $core.isVeryLow) return 0.5;
-if(typeof $core.isUltraLow !== 'undefined' && $core.isUltraLow) return 0.6;
-if(typeof $core.isLowEndDesktop !== 'undefined' && $core.isLowEndDesktop) return 0.85;
-return 1;
+// Ultra-HD Retina/High-DPI sampling
+const dpr = window.devicePixelRatio || 1;
+return Math.min(2.5, Math.max(1, dpr));
 }
 function resize(){
 const nw=$core.canvas.offsetWidth||window.innerWidth;

@@ -12,13 +12,13 @@ return e;
 };
 const _alienAlreadyUnlocked = (() => { try { return localStorage.getItem('diy_unlocked_alien') === '1'; } catch(e) { return false; } })();
 const CHARS = [
-{ id: 'soldier', emoji: '', name: 'Soldier', stat: 'Balanced' },
-{ id: 'commando', emoji: '◎', name: 'Commando', stat: 'Fast' },
-{ id: 'elite', emoji: '▣', name: 'Elite', stat: 'Tankiest' },
-{ id: 'sniper', emoji: '', name: 'Sniper', stat: '+Rifle DMG' },
-{ id: 'heavy', emoji: '', name: 'Heavy', stat: '+Minigun' },
-{ id: 'medic', emoji: '+', name: 'Medic', stat: 'Regen HP' },
-{ id: 'alien', emoji: 'A', name: 'Alien', stat: _alienAlreadyUnlocked ? '+Speed +Laser' : 'Wave 10', locked: !_alienAlreadyUnlocked },
+{ id: 'soldier', emoji: '▲', name: 'GHOST REYES', stat: 'Tier 1 Operator // Balanced Assault' },
+{ id: 'commando', emoji: '◈', name: 'SOAP MACAVOY', stat: 'Recon Specialist // High Mobility' },
+{ id: 'elite', emoji: '▣', name: 'CAPTAIN PRICE', stat: 'Task Force Leader // Heavy Juggernaut' },
+{ id: 'sniper', emoji: '◆', name: 'SIMON RILEY', stat: 'Long-Range Overwatch // High Velocity' },
+{ id: 'heavy', emoji: '■', name: 'ROZE BALES', stat: 'Breacher // High-Cap Drum & Suppression' },
+{ id: 'medic', emoji: '+', name: 'FARAH KARIM', stat: 'Combat Corpsman // Tactical Regeneration' },
+{ id: 'alien', emoji: '★', name: 'CYPHER SHADOW', stat: _alienAlreadyUnlocked ? 'Classified Tech // High Energy' : 'Clear Wave 10', locked: !_alienAlreadyUnlocked },
 ];
 const LEVELS = (typeof gameDB !== 'undefined' ? gameDB.getAllLevels() : [])
 .filter(l => !l.isEndless && l.id !== 0)
